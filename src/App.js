@@ -1,9 +1,11 @@
-import './App.css';
+import './App.scss';
+
+import PostForm from './features/posts/postsForm';
 
 function App() {
   return (
-    <div className="App">
-     
+    <div className="container">
+     <PostForm />
     </div>
   );
 }
