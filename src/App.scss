@@ -29,6 +29,7 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .card {
@@ -39,6 +40,7 @@ h1, h2, h3 {
   border: 3px solid var(--color-shadow, currentColor);
   box-shadow: .5rem .5rem 0 var(--color-shadow, currentColor);
   width: 600px;
+  margin-bottom: 20px;
 }
 
 .input {
@@ -93,4 +95,22 @@ button {
   border: none;
   border-radius: var(--size-radius);
   font-weight: 900;
+}
+
+.box {
+  background-color: rgb(228, 225, 221);
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  margin-bottom: 10px;
+  h2 {
+    margin: 0;
+    line-height: 0;
+  }
+  span {
+    color: #111;
+    font-weight: 600;
+  }
 }
