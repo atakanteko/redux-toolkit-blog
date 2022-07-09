@@ -10,6 +10,7 @@ import './App.scss';
 
 import PostForm from './features/posts/postsForm';
 import PostsList from './features/posts/PostsList';
+import SinglePostPage from './features/posts/SinglePostPage';
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
             </div>
           )}
         />
+          <Route
+              exact
+              path="/posts/:postId"
+              component={SinglePostPage}
+          />
         <Redirect to="/" />
       </Switch>
     </Router>
