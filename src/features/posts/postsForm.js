@@ -1,18 +1,48 @@
+import React, { useState } from 'react'
+import {useDispatch} from "react-redux";
+import { postAdded } from "./postsSlice";
 
 const PostForm = () => {
+    const dispatch = useDispatch()
+    const [title, setTitle] = useState('')
+    const [content, setContent] = useState('')
+
+    const onTitleChanged = e => setTitle(e.target.value)
+    const onContentChanged = e => setContent(e.target.value)
+
+    const addPost = () => {
+        if (title && content) {
+            dispatch(postAdded({
+                title,
+                content
+            }))
+        }
+    }
     return (
-        <div class="card">
+        <div className="card">
             <h2>Post</h2>
-            <label class="input">
-            <input class="input__field" type="text" placeholder=" " />
-            <span class="input__label">Title</span>
+            <label className="input">
+            <input className="input__field"
+                   type="text"
+                   placeholder=" "
+                   id="postTitle"
+                   name="postTitle"
+                   value={title}
+                   onChange={onTitleChanged}/>
+            <span className="input__label">Title</span>
             </label>
-            <label class="input">
-            <input class="input__field" type="text" placeholder=" " />
-            <span class="input__label">Content</span>
+            <label className="input">
+            <input className="input__field"
+                   type="text"
+                   placeholder=" "
+                   id="postContent"
+                   name="postContent"
+                   value={content}
+                   onChange={onContentChanged}/>
+            <span className="input__label">Content</span>
             </label>
-            <div class="button-group">
-            <button>Add</button>
+            <div className="button-group">
+            <button onClick={addPost}>Add</button>
             </div>
       </div>
     )
