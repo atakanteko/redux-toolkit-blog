@@ -7,12 +7,19 @@ const postsSlice = createSlice({
         { id: '2', title: 'Second Post', content: 'More text' }
       ],
     reducers: {
-        postAdded: (state, action) => {
-            const newPost = {
-                id: nanoid(),
-                ...action.payload
+        postAdded: {
+            reducer(state, action) {
+                state.push(action.payload)
+            },
+            prepare(title, content) {
+                return {
+                    payload: {
+                        id: nanoid(),
+                        title,
+                        content
+                    }
+                }
             }
-            state.unshift(newPost)
         },
         postUpdated(state, action) {
             const { id, title, content } = action.payload
