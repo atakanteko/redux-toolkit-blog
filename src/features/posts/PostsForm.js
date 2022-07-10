@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {useDispatch} from "react-redux";
-import { postAdded } from "./postsSlice";
+import { postAdded } from "./PostsSlice";
 
 const PostForm = () => {
     const dispatch = useDispatch()

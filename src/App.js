@@ -8,9 +8,10 @@ import {
 
 import './App.scss';
 
-import PostForm from './features/posts/postsForm';
+import PostForm from './features/posts/PostsForm';
 import PostsList from './features/posts/PostsList';
 import SinglePostPage from './features/posts/SinglePostPage';
+import {EditPostForm} from "./features/posts/EditPostForm";
 
 function App() {
   return (
@@ -31,7 +32,8 @@ function App() {
               path="/posts/:postId"
               component={SinglePostPage}
           />
-        <Redirect to="/" />
+          <Route exact path="/editPost/:postId" component={EditPostForm} />
+          <Redirect to="/" />
       </Switch>
     </Router>
   );
