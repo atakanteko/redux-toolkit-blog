@@ -6,8 +6,10 @@ import {TimeAgo} from "./TimeAgo";
 
 const PostsList = () => {
     const posts = useSelector(state => state.posts)
-    
-    const renderedPosts = posts.map((post, index) => {
+
+    const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
+
+    const renderedPosts = orderedPosts.map((post, index) => {
         return(
             <div key={index} className='box'>
                 <h2>{post.id}</h2>
