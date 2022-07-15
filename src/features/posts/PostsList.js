@@ -1,35 +1,60 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {PostAuthor} from "./PostAuthor";
 import {TimeAgo} from "./TimeAgo";
 import {ReactionButtons} from "./ReactionButtons";
+import {selectAllPosts, fetchPosts} from "./PostsSlice";
 
 const PostsList = () => {
-    const posts = useSelector(state => state.posts)
+    const posts = useSelector(selectAllPosts)
+    const dispatch = useDispatch()
 
-    const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
+    const postStatus = useSelector(state => state.posts.status)
 
-    const renderedPosts = orderedPosts.map((post, index) => {
+    useEffect(() => {
+        if (postStatus === 'idle') {
+            dispatch(fetchPosts())
+        }
+    }, [postStatus, dispatch])
+
+    const renderedPosts = posts.map((post, index) => {
+        console.log(post)
         return(
             <div key={index} className='box'>
                 <h2>{post.id}</h2>
                 <span>{post.title}</span>
                 <PostAuthor userId={post.user}/>
-                <TimeAgo timestamp={post.date} />
                 <Link to={`/posts/${post.id}`} className="button muted-button">
                     View Post
                 </Link>
-                <ReactionButtons post={post}/>
+
             </div>
         )
     })
 
-    return(
-        <>
-            {renderedPosts}
-        </>
-    )
+    if (postStatus === 'loading') {
+        return (
+            <div>
+                Loading...
+            </div>
+        )
+    } else if (postStatus === 'failed') {
+        return (
+            <div>
+                Failed
+            </div>
+        )
+    } else {
+        return(
+            <>
+                {renderedPosts}
+            </>
+        )
+    }
+
+
+
 }
 
 export default PostsList
